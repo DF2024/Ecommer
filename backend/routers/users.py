@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from models.users import UserCreate, User, UserResponse, UserLogin, UserUpdate, Token
+from backend.models.users import UserCreate, User, UserResponse, UserLogin, UserUpdate, Token
 from sqlmodel import select, update, delete
-from config.db import SessionDep
-from auth import auth
+from backend.config.db import SessionDep
+from backend.auth import auth
 from fastapi.security import OAuth2PasswordBearer
 
 router = APIRouter()
