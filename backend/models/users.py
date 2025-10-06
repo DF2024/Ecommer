@@ -19,6 +19,14 @@ class UserLogin(SQLModel):
     username : str
     password : str
 
+class UserUpdate(SQLModel):
+    username : str
+    email : str
+
+class Token(SQLModel):
+    access_token: str
+    token_type: str
+
 class UserResponse(SQLModel):
     id: int
     username: str
