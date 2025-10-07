@@ -2,19 +2,72 @@
 {% block content %}
 <h2>Registro de Usuarios</h2>
 
-<form method="post" action="/frontend/users/register"">
-    <label>Nombre de usuario:</label>
-    <input type="text" name="username">
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <form class="bg-white p-8 rounded-lg shadow-md w-full max-w-md" method="post" action="/frontend/users/register"">
+            
+            <div class="space-y-5">
+                <div>
+                    <label for="username">
+                        <span class="text-sm font-medium text-gray-700"> Usuario </span>
 
-    <label>Correo electrónico:</label>
-    <input type="text" name="email">
+                        <input
+                            type="text"
+                            id="username"
+                            class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                        />
+                    </label>
 
-    <label>Contraseña:</label>
-    <input type="password" name="password">
+                </div>
 
-    <button type="submit">Registrarse</button>
 
-</form>
+                <div>
+                    <label for="Email">
+                        <span class="text-sm font-medium text-gray-700"> Email </span>
+                        <input
+                            type="email"
+                            id="email"
+                            class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                        />
+                    </label>
 
-<a href="/frontend/users/login">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+
+            
+                <div>
+                    <label for="password">
+                    <span class="text-sm font-medium text-gray-700"> Contraseña </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    />
+                    </label>
+
+                </div>
+                
+                <div>
+                    <a class="group relative inline-block text-sm font-medium text-white focus:ring-3 focus:outline-hidden" href="#">
+                        <span class="absolute inset-0 border border-red-600"></span>
+                        <span
+                            class="block border border-red-600 bg-red-600 px-12 py-3 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1">
+                            Registrarse
+                        </span>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="/frontend/users/login">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+                
+            </div>
+            
+            
+
+    </form>
+
+</div>
+
+
+
 {% endblock %}
