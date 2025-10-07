@@ -1,16 +1,71 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Inicio de Sesión</h2>
 
-<form method="post" action="/frontend/users/login">
-    <label>Usuario:</label>
-    <input type="text" name="username" required>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6 font-sans">Inicio de Sesión</h2>
 
-    <label>Contraseña:</label>
-    <input type="password" name="password" required>
+    <form class="bg-white p-8 rounded-lg shadow-md w-full max-w-md" method="post" action="/frontend/users/login">
+        <div class="space-y-3">
+            <div>
+                <label for="username">
+                    <span class="text-sm font-medium text-gray-700"> Nombre de usuario: </span>
 
-    <button type="submit">Ingresar</button>
-</form>
+                    <input
+                        type="text"
+                        name="username"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                </label>
+            </div>
+            
+            <div>
+                <label for="password">
+                    <span class="text-sm font-medium text-gray-700"> Contraseña: </span>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                </label>
+            </div>
+            
+            <div class="flex flex-col items-center mt-4">
+                <button
+                    class="group relative inline-block text-sm font-medium text-white focus:ring-3 focus:outline-hidden"
+                    type="submit"
+                    >
+                    <span class="absolute inset-0 border border-red-600"></span>
+                    <span
+                        class="block border border-red-600 bg-red-600 px-12 py-3 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+                    >
+                        Iniciar Sesión
+                    </span>
+                </button>
+
+                <p class="mt-3 text-sm text-gray-700">
+                    ¿No tienes cuenta?
+                    <a href="/frontend/users/register" class="text-blue-600 hover:underline">Registrarse</a>
+                </p>
+            </div>
+        </div>
+        
+
+    </form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
 
 <a href="/frontend/users/register">¿No tienes cuenta? Regístrate</a>
 {% endblock %}
