@@ -2,23 +2,39 @@
 {%block content%}
 
 <h1>Productos</h1>
-<table border="1">
-    <tr>
-        <th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Stock</th><th>Acciones</th>
-    </tr>
-    {% for p in products %}
-    <tr>
-        <td>{{ p.id }}</td>
-        <td>{{ p.name }}</td>
-        <td>{{ p.description }}</td>
-        <td>{{ p.price }}</td>
-        <td>{{ p.stock }}</td>
-        <td>
-            <a href="/products/edit/{{ p.id }}">Editar</a> |
-            <a href="/products/delete/{{ p.id }}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
-        </td>
-    </tr>
-    {% endfor %}
+<table>
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>
+                {% if product.image_path %}
+                <img src="/static/uploads/products/{{ product.image_path }}" alt="{{ product.name }}" style="max-width: 50px;">
+                {% else %}
+                Sin imagen
+                {% endif %}
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description or 'Sin descripción' }}</td>
+            <td>${{ "%.2f"|format(product.price) }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <a href="/products/edit/{{ product.id }}">Editar</a>
+                <a href="/products/delete/{{ product.id }}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
+<a href="/products/create">Crear Nuevo Producto</a>
 
 {%endblock%}

@@ -7,7 +7,7 @@ class ProductBase(SQLModel):
     description: str
     price: float
     stock: int
-    image_url: Optional[str] = None
+    image_path: Optional[str] = Field(default = None)
 
 
 class Product(ProductBase, table=True):
@@ -18,6 +18,7 @@ class ProductCreate(ProductBase):
     pass
 
 class ProductResponse(Product):
+    imagen_url: Optional[str] 
     pass
 
 class ProductUpdate(SQLModel):
