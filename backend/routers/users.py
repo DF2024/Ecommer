@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from backend.models.users import UserCreate, User, UserResponse, UserLogin, UserUpdate, Token
+from app.backend.models.users import UserCreate, User, UserResponse, UserLogin, UserUpdate, Token
 from sqlmodel import select, update, delete
-from backend.config.db import SessionDep
-from backend.auth import auth
+from app.backend.config.db import SessionDep
+from app.backend.auth import auth
 from fastapi.security import OAuth2PasswordBearer
 
 router = APIRouter()
@@ -47,7 +47,7 @@ async def user_register(
     )
 ## LOGEAR USUARIO
 
-@router.post("/users/login", response_model = Token)
+@router.post("/users/login", response_model = Token, tags=['Users'])
 async def login_user(
     user_data : UserLogin , 
     session : SessionDep
