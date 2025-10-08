@@ -89,7 +89,7 @@ async def update_product(
     if image and image.filename:
         # Eliminar imagen anterior si existe
         if product.image_path:
-            product_file_manager.delete_product_image(product.image_path)
+            product_file_manager.delete_file(product.image_path)
         # Guardar nueva imagen
 
         try:
@@ -113,7 +113,7 @@ async def delete_product(product_id: int, session: SessionDep):
     product = session.get(Product, product_id)
     if product:
         if product.image_path:
-            product_file_manager.delete_product_image(product.image_path)
+            product_file_manager.delete_file(product.image_path)
         session.delete(product)
         session.commit()
     return RedirectResponse("/products", status_code=303)

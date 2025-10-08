@@ -1,40 +1,61 @@
-{%extends "base.html"%}
-{%block content%}
+{% extends "base.html" %}
+{% block content %}
 
-<h1>Productos</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for product in products %}
-        <tr>
-            <td>
-                {% if product.image_path %}
-                <img src="/static/uploads/products/{{ product.image_path }}" alt="{{ product.name }}" style="max-width: 50px;">
-                {% else %}
-                Sin imagen
-                {% endif %}
-            </td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description or 'Sin descripción' }}</td>
-            <td>${{ "%.2f"|format(product.price) }}</td>
-            <td>{{ product.stock }}</td>
-            <td>
-                <a href="/products/edit/{{ product.id }}">Editar</a>
-                <a href="/products/delete/{{ product.id }}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="/products/create">Crear Nuevo Producto</a>
+<div class="container mx-auto px-4 py-8">
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">📦 Productos</h1>
 
-{%endblock%}
+    <!-- Botón Crear nuevo -->
+    <div class="flex justify-end mb-4">
+        <a href="/products/create" 
+           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition">
+           + Crear Nuevo Producto
+        </a>
+    </div>
+
+    <!-- Tabla responsive -->
+    <div class="overflow-x-auto bg-white shadow-lg rounded-2xl">
+        <table class="min-w-full border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-gray-700 uppercase text-sm">
+                    <th class="py-3 px-4 text-left">Imagen</th>
+                    <th class="py-3 px-4 text-left">Nombre</th>
+                    <th class="py-3 px-4 text-left">Descripción</th>
+                    <th class="py-3 px-4 text-left">Precio</th>
+                    <th class="py-3 px-4 text-left">Stock</th>
+                    <th class="py-3 px-4 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for product in products %}
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="py-3 px-4">
+                        {% if product.image_path %}
+                        <img src="/static/uploads/products/{{ product.image_path }}" 
+                             alt="{{ product.name }}" 
+                             class="w-12 h-12 object-cover rounded-lg border">
+                        {% else %}
+                        <span class="text-gray-400 italic">Sin imagen</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 font-medium text-gray-800">{{ product.name }}</td>
+                    <td class="py-3 px-4 text-gray-600">{{ product.description or 'Sin descripción' }}</td>
+                    <td class="py-3 px-4 font-semibold text-green-600">${{ "%.2f"|format(product.price) }}</td>
+                    <td class="py-3 px-4 text-center">{{ product.stock }}</td>
+                    <td class="py-3 px-4 text-center">
+                        <a href="/products/edit/{{ product.id }}" 
+                           class="text-blue-600 hover:text-blue-800 font-medium mr-3">Editar</a>
+                        <a href="/products/delete/{{ product.id }}" 
+                           class="text-red-600 hover:text-red-800 font-medium"
+                           onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
