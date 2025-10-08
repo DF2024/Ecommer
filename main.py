@@ -15,7 +15,9 @@ app = FastAPI(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 #CONFIGURAR RUTAS ESTATICAS 
-app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "frontend", "static")), name = "static")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(current_dir, "frontend", "static")
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 
 #CONFIGURAR PLANTILLAS

@@ -1,35 +1,121 @@
 {%extends "base.html"%}
 {%block content%}
 
-<h1>Crear nuevo producto</h1>
-<form method="post" enctype="multipart/form-data">
-    <div>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6 font-sans">Crear nuevo producto</h1>
     
-    <div>
-        <label for="description">Descripción:</label>
-        <textarea id="description" name="description"></textarea>
-    </div>
     
-    <div>
-        <label for="price">Precio:</label>
-        <input type="number" id="price" name="price" step="0.01" required>
-    </div>
+        <form class="bg-white p-8 rounded-lg shadow-md w-full max-w-md"  method="post" enctype="multipart/form-data">
+            <div class="space-y-3">
+                <div>
+                    <label for="name">
+                    <span class="text-sm font-medium text-gray-700"> Nombre del producto: </span>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                    </label>
+                </div>
+                
+                <div>
+                    <label for="description">
+                    <span class="text-sm font-medium text-gray-700"> Descripción: </span>
+
+                    <textarea
+                        type="text"
+                        id="description"
+                        name="description"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                    </textarea>
+
+                </div>
+                
+                <div>
+                    <label for="price">
+                    <span class="text-sm font-medium text-gray-700"> Precio: </span>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                    </label>
+                </div>
+                
+                <div>
+                    <label for="stock">
+                    <span class="text-sm font-medium text-gray-700"> Stock: </span>
+
+                    <input
+                        type="number"
+                        id="stock"
+                        name="stock"
+                        class="w-full border border-gray-300 rounded-lg p-2"
+                        required
+                    />
+                    </label>
+                </div>
+                
+                <div>
+
+                    <label for="image" class="block rounded border border-gray-300 p-4 text-gray-900 shadow-sm sm:p-6">
+                        <div class="flex items-center justify-center gap-4">
+                            <span class="font-medium"> Subir imagen </span>
+
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="size-6"
+                            >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+                            />
+                            </svg>
+                        </div>
+
+                        <input type="file" id="image" name="image" class="sr-only" />
+                    </label>
+
+                </div>
+
+                <div class="flex flex-col items-center mt-4">
+                    <button
+                        class="group relative inline-block text-sm font-medium text-white focus:ring-3 focus:outline-hidden"
+                        type="submit"
+                        >
+                            <span class="absolute inset-0 border border-red-600"></span>
+                            <span
+                                class="block border border-red-600 bg-red-600 px-12 py-3 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+                            >
+                                Crear Producto
+                        </span>
+                    </button>
+                </div>
+                
     
-    <div>
-        <label for="stock">Stock:</label>
-        <input type="number" id="stock" name="stock" required>
-    </div>
-    
-    <div>
-        <label for="image">Imagen:</label>
-        <input type="file" id="image" name="image" accept="image/*">
-    </div>
-    
-    <button type="submit">Crear Producto</button>
-</form>
+            </div>
+                
+    </form>
+</div>
+
+
+
+
+
+
 
 
 {%endblock%}

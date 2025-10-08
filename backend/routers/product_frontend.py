@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import select
 from app.backend.config.db import SessionDep
 from app.backend.models.product import Product
-from app.backend.utils.file_utils import save_uploaded_file, delete_product_image, get_image_url
+from app.backend.utils.file_utils import product_file_manager
 
 router = APIRouter(prefix = "/products", tags = ["Products Frontend"])
 
@@ -39,16 +39,21 @@ async def create_product(
 ):
     image_filename = None
 
-    if image and image_filename:
-        image_filename = save_uploaded_file(image)
-
+    if image and image.filename:
+        try: 
+            image_filename = product_file_manager.save_uploaded_file(image)
+        except HTTPException as e:
+            return templates.TemplateResponse(
+                "products/create.html", 
+                {"request": request, "error": e.detail}
+            )
 
     new_product = Product(
         name=name,
         description=description,
         price=price,
         stock=stock,
-        image_url=image_filename
+        image_path=image_filename
     )
 
     session.add(new_product)
@@ -84,10 +89,14 @@ async def update_product(
     if image and image.filename:
         # Eliminar imagen anterior si existe
         if product.image_path:
-            delete_product_image(product.image_path)
+            product_file_manager.delete_product_image(product.image_path)
         # Guardar nueva imagen
-        image_filename = save_uploaded_file(image)
-        product.image_path = image_filename
+
+        try:
+            image_filename = product_file_manager.save_uploaded_file(image)
+            product.image_path = image_filename
+        except HTTPException as e:
+            pass
 
     # Actualizar otros campos
     product.name = name
@@ -104,7 +113,7 @@ async def delete_product(product_id: int, session: SessionDep):
     product = session.get(Product, product_id)
     if product:
         if product.image_path:
-            delete_product_image(product.image_path)
+            product_file_manager.delete_product_image(product.image_path)
         session.delete(product)
         session.commit()
     return RedirectResponse("/products", status_code=303)
