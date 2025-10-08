@@ -1,0 +1,24 @@
+{%extends "base.html"%}
+{%block content%}
+
+<h1>Productos</h1>
+<table border="1">
+    <tr>
+        <th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Stock</th><th>Acciones</th>
+    </tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.description }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+            <a href="/products/edit/{{ p.id }}">Editar</a> |
+            <a href="/products/delete/{{ p.id }}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{%endblock%}
